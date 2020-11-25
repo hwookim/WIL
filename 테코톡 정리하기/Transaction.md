@@ -53,7 +53,7 @@ PostgreSQL은 Read Committed
 
 한 트랜잭션이 접근 중인 데이터에 대해 접근 불가능 -> 사실상 비관적 잠금과 동일
 
-![스크린샷 2020-11-25 오후 11.43.08](/Users/hwookim/Library/Application Support/typora-user-images/스크린샷 2020-11-25 오후 11.43.08.png)
+![격리수준에 따른 문제](https://user-images.githubusercontent.com/45786387/100245950-f2726c00-2f7b-11eb-8478-8a68785d0301.png)
 
 ### Dirty Read
 
@@ -73,11 +73,11 @@ Non-Repeatable Read는 수정에 대한 오류고, Phantom Read는 트랜잭션 
 
 트랜잭션 내부에서 새로운 트랜잭션이 발생할 때 어떻게 처리하는가?
 
-![스크린샷 2020-11-26 오전 12.05.10](/Users/hwookim/Library/Application Support/typora-user-images/스크린샷 2020-11-26 오전 12.05.10.png)
+![전파방식](https://user-images.githubusercontent.com/45786387/100245965-f605f300-2f7b-11eb-8467-d46941e578b7.png)
 
 ## 트랜잭션 메커니즘
 
-![스크린샷 2020-11-25 오후 11.00.17](/Users/hwookim/Library/Application Support/typora-user-images/스크린샷 2020-11-25 오후 11.00.17.png)
+![매커니즘](https://user-images.githubusercontent.com/45786387/100245897-e25a8c80-2f7b-11eb-9f6c-a337570c6442.png)
 
 ### 정상 상황
 
