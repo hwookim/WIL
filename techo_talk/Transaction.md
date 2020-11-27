@@ -6,47 +6,47 @@
 
 ### 원자성 Atomicity
 
-All or Nothing
+All or Nothing  
 성공하지 못하면 Rollback을 통해 이전 상태로 되돌림
 
 ### 일관성 Consistency
 
-처리 결과의 일관성 보장
+처리 결과의 일관성 보장  
 DB 테이블의 제약조건, 데이터 형식등을 일관성있게 유지해야함
 
 ### 독립성 Isolation
 
-서로 다른 트랜잭션에 대해 간섭할 수 없음
-이는 트랜잭션의 성질 중 가장 느슨한 규칙임
-격리 레벨과 잠금으로 보장할 수 있음
+서로 다른 트랜잭션에 대해 간섭할 수 없음  
+이는 트랜잭션의 성질 중 가장 느슨한 규칙임  
+격리 레벨과 잠금으로 보장할 수 있음  
 무조건적인 독립성 보장은 성능 저하의 큰 원인, 교착상태 발생의 원인!
 
 ### 지속성 Durability
 
-한 번 반영된 트랜잭션의 결과는 영구히 유지되어야 함
+한 번 반영된 트랜잭션의 결과는 영구히 유지되어야 함  
 커밋된 이후에 이전 상태로 되돌리는 것은 새로운 트랜잭션의 결과임 -> 이전 트랜잭션 결과의 지속성 침해가 아님
 
 ## 격리 수준 (Isolation Level)
 
-Spring의 Isolation.DEFAULT는 DB 설정에 의존하게 된다.
-MySQL은 Repeatable Read가 기본
+Spring의 Isolation.DEFAULT는 DB 설정에 의존하게 된다.  
+MySQL은 Repeatable Read가 기본  
 PostgreSQL은 Read Committed
 
 ### Read UnCommitted
 
-아무런 제약 조건 없음
+아무런 제약 조건 없음  
 하나의 트랜잭션에서 커밋되지 않은 데이터에 대한 개별 트랜잭션의 접근 허용
 
 일관성 유지 하나도 안됨
 
 ### Read Committed
 
-커밋된 데이터에 대해서만 접근 가능
+커밋된 데이터에 대해서만 접근 가능  
 변경 중인 데이터에 대해 접근 불가능
 
 ### Repeatable Read
 
-한번 조회한 데이터에 대해 반복 조회 시 일관성을 유지함
+한번 조회한 데이터에 대해 반복 조회 시 일관성을 유지함  
 조회 중인 데이터에 대해 다른 트랜잭션은 수정 불가능
 
 ### Serializable
@@ -57,7 +57,7 @@ PostgreSQL은 Read Committed
 
 ### Dirty Read
 
-동시 접근에 의해 데이터의 일관성이 보장되지 않음
+동시 접근에 의해 데이터의 일관성이 보장되지 않음  
 기존 트랜잭션이 update를 실행한 후 오류에 의해 rollback했지만 다른 트랜잭션은 update된 데이터를 조회할 수 있음
 
 ### Non-Repeatable Read
@@ -66,7 +66,7 @@ update를 실행 중인 트랜잭션에 의해 다른 트랜잭션 영역 내에
 
 ### Phantom Read
 
-기존 트랜잭션이 Insert를 실행하고 다른 트랜잭션이 전체 조회를 할 때, 시점에 따라서 조회 대상이 달라짐
+기존 트랜잭션이 Insert를 실행하고 다른 트랜잭션이 전체 조회를 할 때, 시점에 따라서 조회 대상이 달라짐  
 Non-Repeatable Read는 수정에 대한 오류고, Phantom Read는 트랜잭션 영역 내 삽입에 대한 오류
 
 ## 트랜잭션 전파 방식 (Propagation)
