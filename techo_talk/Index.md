@@ -41,3 +41,4 @@ InnoDB의 PK는 항상 clustered index
 [레베카의 인덱스](https://www.youtube.com/watch?v=9ZXIoh9PtwY&list=PLgXGHBqgT2TvpJ_p9L_yZKPifgdBOzdVH&index=24&ab_channel=%EC%9A%B0%EC%95%84%ED%95%9CTech)
 
 [올라프의 Clustered vs Non-Clustered Indx](https://www.youtube.com/watch?v=js4y5VDknfA&list=PLgXGHBqgT2TvpJ_p9L_yZKPifgdBOzdVH&index=56&ab_channel=%EC%9A%B0%EC%95%84%ED%95%9CTech)
+
