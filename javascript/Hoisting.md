@@ -33,3 +33,4 @@ const str = "HI";
 ```
 
 [MDN](https://developer.mozilla.org/ko/docs/Glossary/Hoisting)
+[let, const Hoisting](https://medium.com/korbit-engineering/let%EA%B3%BC-const%EB%8A%94-%ED%98%B8%EC%9D%B4%EC%8A%A4%ED%8C%85-%EB%90%A0%EA%B9%8C-72fcf2fac365)
