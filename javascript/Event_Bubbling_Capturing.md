@@ -52,3 +52,7 @@ function App() {
 
 이벤트 객체에 정의된 내용으로 현재 이벤트 흐름 단계를 알 수 있다.  
 캡처링=1, 타깃=2, 버블링=3
+
+---
+
+[모던 Javascript 듀토리얼](https://ko.javascript.info/bubbling-and-capturing)
