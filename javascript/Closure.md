@@ -56,3 +56,6 @@ const store2 = createStore();
 - 외부 함수 범위 (Outer Functions Scope)
 - 전역 범위 (Global Scope)
 
+---
+
+[MDN](https://developer.mozilla.org/ko/docs/Web/JavaScript/Closures)
