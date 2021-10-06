@@ -43,3 +43,4 @@ functional component에서 PureComponent의 역할을 할 수 있도록 하는 [
 ---
 
 [shallow compare 부터 React.PureComponent 까지](https://ideveloper2.tistory.com/159)
+[How does shallow compare work in react](https://www.notion.so/PureComponent-7898c0dd1e7c4862891353706437b71c#454e13dcf5f849dba39c5ab6fd866d75)
