@@ -56,6 +56,7 @@ describe('on change file input', () => {
   const file = new File(['test'], 'test.png', { type: 'image/png' });
   
   // URL.createObjectURL을 mocking해 변경되는 파일 입력이 제대로 반영되는지 확인할 수 있도록 한다.
+  // jest의 실행환경에는 global.URL 객체가 없다!! 그러니까 mocking 해야만한다!
   const mockedFileConverter = jest.fn((file) => file.toString());
   URL.createObjectURL = mockedFileConverter;
 
