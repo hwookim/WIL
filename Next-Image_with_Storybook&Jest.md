@@ -1,5 +1,7 @@
 # next/image with Storybook, Jest
 
+[샘플코드](https://github.com/hwookim/nextjs-practice/tree/next_image)
+
 ## [next/image](https://nextjs.org/docs/api-reference/next/image)
 
 resizing, 최적화 등을 지원  
@@ -40,7 +42,7 @@ Object.defineProperty(NextImage, 'default', {
 `next/image`를 이용하면 랜더링 시 최적화에 의해서 `src` 속성이 최적화되어 변경된 값으로 반영된다.  
 이에 props에 따른 이미지 출력, 선택에 따른 이미지 변화 등을 테스트할 수 없게 된다.
 
-이를 테스트하기 위해서는 `next/image`의 컴포넌트가 아니라 단순 `img`태그로 mocking해 
+이를 테스트하기 위해서는 `next/image`의 컴포넌트가 아니라 단순 `img`태그로 mocking해   
 테스트를 우회해서 진행할 수 있도록 변경해야한다.
 
 ```jsx
@@ -48,3 +50,16 @@ jest.mock('next/image', () => function MockImage(props) {
   return <img {...props} />;
 });
 ```
+
+mocking 시 주의할 점이 하나 있는데, `next/image`를 mocking해야하기 때문에  
+위의 코드를 해당 컴포넌트의 import 보다 먼저 해야한다.
+
+```tsx
+import { MockImage } from '@mocks/MockComponents';
+jest.mock('next/image', () => MockImage);
+
+import React from 'react';
+import ImageComponent from '@/components/ImageComponent';
+import { render } from '@testing-library/react';
+```
+이런 식으로!
