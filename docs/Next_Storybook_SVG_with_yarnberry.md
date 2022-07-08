@@ -136,7 +136,7 @@ yarn add -D process
 검색한 stackoverflow 글에선 추가적으로 설정을 하라고 하긴 하는데, 별도 설정 없어도 잘 된다.
 
 이젠 진짜로 실행이 잘 된다!!!!!
-![](assets/Next_Storybook_SVG_with_yarnberry.png)
+![](https://user-images.githubusercontent.com/45786387/178015943-302b8a92-ea99-43ab-b8a7-a7d60f47a16a.png)
 
 ---
 [Storybook: Failed to execute 'createElement' on svg files using @svgr/webpack](https://stackoverflow.com/questions/61498644/storybook-failed-to-execute-createelement-on-svg-files-using-svgr-webpack)
