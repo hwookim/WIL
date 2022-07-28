@@ -18,7 +18,7 @@ export default function DonutChart({
     () => (size - strokeWidth) / 2,
     [size, strokeWidth],
   );
-  const diameter = useMemo<number>(() => 2 * Math.PI * radius, [radius]);
+  const circumference = useMemo<number>(() => 2 * radius * Math.PI, [radius]);
   const total = useMemo<number>(
     () => dataset.map(({ value }) => value).reduce((prev, v) => prev + v),
     [dataset],
@@ -49,10 +49,10 @@ export default function DonutChart({
           fill="transparent"
           stroke={color}
           strokeWidth={strokeWidth}
-          strokeDasharray={`${diameter * ratios[i]} ${
-            diameter * (1 - ratios[i])
+          strokeDasharray={`${circumference * ratios[i]} ${
+            circumference * (1 - ratios[i])
           }`}
-          strokeDashoffset={diameter * accArr[i] * -1}
+          strokeDashoffset={circumference * accArr[i] * -1}
         />
       ))}
     </svg>
