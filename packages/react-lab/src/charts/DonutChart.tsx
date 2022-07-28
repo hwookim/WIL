@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import styled from '@emotion/styled';
 
 export interface DonutChartProps {
   size: number;
@@ -40,7 +41,7 @@ export default function DonutChart({
   );
 
   return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+    <Container width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
       {dataset.map(({ color }, i) => (
         <circle
           cx={size / 2}
@@ -52,9 +53,13 @@ export default function DonutChart({
           strokeDasharray={`${circumference * ratios[i]} ${
             circumference * (1 - ratios[i])
           }`}
-          strokeDashoffset={circumference * accArr[i] * -1}
+          strokeDashoffset={circumference * (1 - accArr[i])}
         />
       ))}
-    </svg>
+    </Container>
   );
 }
+
+const Container = styled.svg`
+  transform: rotate(-90deg);
+`;
