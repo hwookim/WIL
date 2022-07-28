@@ -16,20 +16,20 @@ export const Default = Template.bind({});
 Default.args = {
   dataset: [
     {
-      color: '#aaa',
-      rate: 0.1,
+      color: '#ddd',
+      value: 10,
     },
     {
       color: '#bbb',
-      rate: 0.2,
+      value: 20,
     },
     {
-      color: '#ddd',
-      rate: 0.3,
+      color: '#aaa',
+      value: 30,
     },
     {
-      color: '#666',
-      rate: 0.4,
+      color: '#888',
+      value: 40,
     },
   ],
 };
