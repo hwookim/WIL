@@ -56,10 +56,30 @@ export default function DonutChart({
           strokeDashoffset={circumference * (1 - accArr[i])}
         />
       ))}
+      <AnimatedCircle
+        cx={size / 2}
+        cy={size / 2}
+        r={radius}
+        fill="transparent"
+        stroke="white"
+        strokeWidth={strokeWidth}
+        strokeDasharray={`${circumference} ${circumference}`}
+        strokeDashoffset={-circumference}
+      />
     </Container>
   );
 }
 
 const Container = styled.svg`
   transform: rotate(-90deg);
+`;
+
+const AnimatedCircle = styled.circle`
+  animation: circle-fade-out 2s ease;
+
+  @keyframes circle-fade-out {
+    0% {
+      stroke-dashoffset: 0;
+    }
+  } ;
 `;
