@@ -164,7 +164,111 @@ const Container = styled.svg`
 
 `total` 값을 계산해 비율을 구하기 때문에 기존에 남는 부분을 담당하던 `circle`은 사라졌다.
 
+## 애니메이션 넣기
+
+도넛 차트를 만들었으면 뭔가 애니메이션을 넣어줘야할 것 같은 기분이다.  
+바로 이런거 ↓
+
+![애니메이션 예시](../assets/SVG_Donut_Chart_5.gif)  
+출처 = Tecoble-리액트에서 도넛 차트를 만들어보자!
+
+위와 같은 애니메이션을 넣는 법은 간단하다.
+
+하나의 `<circle>`만을 이용하고 있다면 `keyframes`를 통해 하나의 애니메이션만 추가해주면 된다.
+
+```tsx
+const AnimatedCircle = styled.circle`
+  animation: circle-fill-animation 2s ease;
+
+  @keyframes circle-fill-animation {
+    0% {
+      stroke-dasharray: 0 ${({circumference}) => circumference};
+    }
+  }
+`;
+```
+
+인자로 원주값을 받고, `dasharray`의 점선값을 0에서 필요한 값으로 늘리고, 공백값을 원주에서 원래의 공백값으로 줄여주면 된다.
+
+하지만 우리는 여러개의 원을 통해서 여러 데이터를 한 번에 표시하고 있다.  
+어떻게하면 여러 원에 애니메이션을 한 번에 적용할 수 있을까?
+
+다시 생각해보자.
+
+어떻게 하면 여러 원에 애니메이션이 한 번에 **적용된 것처럼 보이게 할 수 있을까?**
+
+전체 원 위에 하나의 원을 그리고 그 원이 조금씩 사라지도록 해보자.
+
+```tsx
+//...
+
+export default function DonutChart(args) {
+  //...
+  return (
+    <Container width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      {dataset.map(({ color }, i) => (
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          fill="transparent"
+          stroke={color}
+          strokeWidth={strokeWidth}
+          strokeDasharray={`${circumference * ratios[i]} ${
+            circumference * (1 - ratios[i])
+          }`}
+          strokeDashoffset={circumference * (1 - accArr[i])}
+        />
+      ))}
+      <AnimatedCircle
+        cx={size / 2}
+        cy={size / 2}
+        r={radius}
+        fill="transparent"
+        stroke="white"
+        strokeWidth={strokeWidth}
+        strokeDasharray={`${circumference} ${circumference}`}
+        strokeDashoffset={-circumference} // -를 넣어줘야한다! 주의!
+      />
+    </Container>
+  );
+};
+
+const Container = styled.svg`
+  transform: rotate(-90deg);
+`;
+
+const AnimatedCircle = styled.circle`
+  animation: circle-fade-out 2s ease;
+
+  @keyframes circle-fade-out {
+    0% {
+      stroke-dashoffset: 0;
+    }
+  } ;
+`;
+```
+![실행결과](../assets/SVG_Donut_Chart_6.gif)
+
+전체 원을 뒤덮는 원인 `<AnimatedCircle>`을 통해 전체 원에 애니메이션이 적용된 것처럼 꾸몄다.
+
+주의할 점은 `dashoffset`이 `0`에서 `-circumference` 방향으로 가는 것이다.
+
+위의 `dashoffset`설명을 다시 보면, 음수로 갈 때 점선이 오른쪽으로, 앞으로 나아간다.  
+우리는 하얀색으로 칠한 원의 테두리를 조금씩 밀어내며 원래 정보를 보여주는 원을 표시해야히기때문에 `dashoffset`은 음수 방향으로 향해야한다.
+
+이로써 데이터가 조금씩 나타나는 모양으로 애니메이션이 적용된다!
+
+
+### 남은 문제
+
+하지만 아직 문제가 있다.
+
+지금은 흰색 배경이기에 흰색 테두리를 사용했지만, 배경이 어떤 색일지는 알 수 없다.  
+이건 어떻게 해결할지 아직 모르겠다. 애니메이션을 아예 다른 걸로 바꿔야하나.
+
 ---
 
 [리액트로 도넛 차트를 만들어보자!](https://tecoble.techcourse.co.kr/post/2021-11-10-making-donut-chart-react/)
+
 [SVG와 삼각 함수로 도넛 차트 만들어보기](https://evan-moon.github.io/2020/12/12/draw-arc-with-svg-clippath/)
