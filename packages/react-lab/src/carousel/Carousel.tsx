@@ -75,6 +75,15 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
+
+  button {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  &:hover button {
+    opacity: 0.8;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -100,6 +109,8 @@ const Button = styled.button`
   height: 32px;
   border-radius: 50%;
   border: none;
+  color: white;
+  cursor: pointer;
 `;
 
 const LeftButton = styled(Button)``;
