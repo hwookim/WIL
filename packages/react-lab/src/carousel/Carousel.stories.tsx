@@ -36,4 +36,5 @@ Default.args = {
       alt: '무지개',
     },
   ],
+  interval: 3000,
 };
