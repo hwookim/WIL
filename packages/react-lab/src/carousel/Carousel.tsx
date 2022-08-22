@@ -26,7 +26,7 @@ export default function Carousel({
     (direction: number) => {
       const value = current + direction;
       if (value < 0) {
-        setCurrent(dataset.length);
+        setCurrent(dataset.length - 1);
         return;
       }
       if (value >= dataset.length) {
