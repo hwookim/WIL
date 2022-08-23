@@ -66,6 +66,9 @@ export default function Carousel({
       </ImageContainer>
       <LeftButton onClick={onClickLeftButton}>&lt;</LeftButton>
       <RightButton onClick={onClickRightButton}>&gt;</RightButton>
+      <Counter>
+        {current + 1} / {dataset.length}
+      </Counter>
     </Container>
   );
 }
@@ -109,12 +112,31 @@ const Button = styled.button`
   height: 32px;
   border-radius: 50%;
   border: none;
+  background: rgba(0, 0, 0, 0.4);
   color: white;
+  font-weight: bold;
   cursor: pointer;
 `;
 
-const LeftButton = styled(Button)``;
+const LeftButton = styled(Button)`
+  left: 24px;
+`;
 
 const RightButton = styled(Button)`
-  right: 0;
+  right: 24px;
+`;
+
+const Counter = styled.div`
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  width: 50px;
+  height: 25px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  font-weight: bold;
 `;
