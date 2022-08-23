@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 
 export interface CarouselProps {
   dataset: {
@@ -77,9 +78,9 @@ export default function Carousel({
         onMouseLeave={onMouseLeaveImage}
       >
         {dataset.map(({ src, alt, link }, index) => (
-          <Link href={link}>
-            <Image key={alt + index} src={src} alt={alt} />
-          </Link>
+          <ImageLink key={alt + index} to={link}>
+            <Image src={src} alt={alt} />
+          </ImageLink>
         ))}
       </ImageContainer>
       <LeftButton onClick={onClickLeftButton}>&lt;</LeftButton>
@@ -115,7 +116,7 @@ const ImageContainer = styled.div`
   flex-wrap: nowrap;
 `;
 
-const Link = styled.a`
+const ImageLink = styled(Link)`
   flex: 0 0 auto;
   width: 100%;
   height: 100%;
