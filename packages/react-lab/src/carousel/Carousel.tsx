@@ -5,6 +5,7 @@ export interface CarouselProps {
   dataset: {
     src: string;
     alt: string;
+    link: string;
   }[];
   interval: number;
 }
@@ -75,8 +76,10 @@ export default function Carousel({
         onMouseEnter={onMouseEnterImage}
         onMouseLeave={onMouseLeaveImage}
       >
-        {dataset.map(({ src, alt }, index) => (
-          <Image key={alt + index} src={src} alt={alt} />
+        {dataset.map(({ src, alt, link }, index) => (
+          <Link href={link}>
+            <Image key={alt + index} src={src} alt={alt} />
+          </Link>
         ))}
       </ImageContainer>
       <LeftButton onClick={onClickLeftButton}>&lt;</LeftButton>
@@ -112,12 +115,16 @@ const ImageContainer = styled.div`
   flex-wrap: nowrap;
 `;
 
-const Image = styled.img`
+const Link = styled.a`
   flex: 0 0 auto;
   width: 100%;
   height: 100%;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  cursor: pointer;
 `;
 
 const Button = styled.button`
