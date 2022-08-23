@@ -14,10 +14,12 @@ export default function Carousel({
   interval = 0,
 }: CarouselProps): JSX.Element {
   const [current, setCurrent] = useState(0);
+  const [isHover, setIsHover] = useState<boolean>(false);
   const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!carouselRef?.current) return;
+
     carouselRef.current.style.transition = 'all 0.5s ease-in-out';
     carouselRef.current.style.transform = `translateX(-${current}00%)`;
   }, [current]);
@@ -39,6 +41,7 @@ export default function Carousel({
   );
 
   useEffect(() => {
+    if (isHover) return;
     if (interval <= 0) {
       return;
     }
@@ -47,7 +50,7 @@ export default function Carousel({
     }, interval);
 
     return () => clearInterval(timer);
-  }, [current, interval, moveCarousel]);
+  }, [current, interval, isHover, moveCarousel]);
 
   const onClickLeftButton = () => {
     moveCarousel(-1);
@@ -57,9 +60,21 @@ export default function Carousel({
     moveCarousel(+1);
   };
 
+  const onMouseEnterImage = () => {
+    setIsHover(true);
+  };
+
+  const onMouseLeaveImage = () => {
+    setIsHover(false);
+  };
+
   return (
     <Container>
-      <ImageContainer ref={carouselRef}>
+      <ImageContainer
+        ref={carouselRef}
+        onMouseEnter={onMouseEnterImage}
+        onMouseLeave={onMouseLeaveImage}
+      >
         {dataset.map(({ src, alt }, index) => (
           <Image key={alt + index} src={src} alt={alt} />
         ))}
@@ -102,6 +117,7 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
+  cursor: pointer;
 `;
 
 const Button = styled.button`
