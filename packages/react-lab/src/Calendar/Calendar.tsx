@@ -13,8 +13,8 @@ export default function Calendar({
   const [year, setYear] = useState(defaultYear);
   const [month, setMonth] = useState(defaultMonth);
 
-  const daysInMonth = new Date(year, month, 0).getDate();
-  const days = Array.from(Array(daysInMonth).keys()).map((i) => i + 1);
+  const endDate = new Date(year, month, 0).getDate();
+  const days = Array.from(Array(endDate).keys()).map((i) => i + 1);
 
   const startDateDay = new Date(year, month - 1, 1).getDay();
   const endOfPrevMonth = new Date(year, month - 1, 0).getDate();
