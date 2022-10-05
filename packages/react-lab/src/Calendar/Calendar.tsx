@@ -1,11 +1,18 @@
 import styled from '@emotion/styled';
+import { useState } from 'react';
 
 export interface CalendarProps {
   year: number;
   month: number;
 }
 
-export default function Calendar({ year, month }: CalendarProps): JSX.Element {
+export default function Calendar({
+  year: defaultYear,
+  month: defaultMonth,
+}: CalendarProps): JSX.Element {
+  const [year, setYear] = useState(defaultYear);
+  const [month, setMonth] = useState(defaultMonth);
+
   const daysInMonth = new Date(year, month, 0).getDate();
   const days = Array.from(Array(daysInMonth).keys()).map((i) => i + 1);
   const startDateDay = new Date(year, month - 1, 1).getDay();
@@ -13,11 +20,33 @@ export default function Calendar({ year, month }: CalendarProps): JSX.Element {
   const endDateDay = new Date(year, month, 0).getDay();
   const endEmptyDays = Array.from(Array(6 - endDateDay).keys());
 
+  const handleClickLeftBtn = () => {
+    if (month === 0) {
+      setMonth(12);
+      setYear((prev) => prev - 1);
+      return;
+    }
+    setMonth((prev) => prev - 1);
+  };
+
+  const handleClickRightBtn = () => {
+    if (month === 12) {
+      setMonth(1);
+      setYear((prev) => prev + 1);
+      return;
+    }
+    setMonth((prev) => prev + 1);
+  };
+
   return (
     <Container>
       <Header>
-        <Month>{month}</Month>
-        <Year>{year}</Year>
+        <Button onClick={handleClickLeftBtn}>&lt;</Button>
+        <div>
+          <Month>{month}</Month>
+          <Year>{year}</Year>
+        </div>
+        <Button onClick={handleClickRightBtn}>&gt;</Button>
       </Header>
       <DayList>
         {startEmptyDays.map((day) => (
@@ -44,7 +73,11 @@ const Container = styled.div`
 `;
 
 const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 0 auto;
+  width: 200px;
   height: 80px;
 `;
 
@@ -54,7 +87,16 @@ const Month = styled.span`
 `;
 
 const Year = styled.span`
+  margin-left: 8px;
   font-size: 16px;
+`;
+
+const Button = styled.button`
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  background-color: transparent;
 `;
 
 const DayList = styled.div`
