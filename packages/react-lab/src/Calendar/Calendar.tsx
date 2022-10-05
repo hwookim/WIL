@@ -15,10 +15,17 @@ export default function Calendar({
 
   const daysInMonth = new Date(year, month, 0).getDate();
   const days = Array.from(Array(daysInMonth).keys()).map((i) => i + 1);
+
   const startDateDay = new Date(year, month - 1, 1).getDay();
-  const startEmptyDays = Array.from(Array(startDateDay).keys());
+  const endOfPrevMonth = new Date(year, month - 1, 0).getDate();
+  const prevMonthDays = Array.from(Array(startDateDay).keys())
+    .map((i) => endOfPrevMonth - i)
+    .reverse();
+
   const endDateDay = new Date(year, month, 0).getDay();
-  const endEmptyDays = Array.from(Array(6 - endDateDay).keys());
+  const nextMonthDays = Array.from(Array(6 - endDateDay).keys()).map(
+    (i) => i + 1,
+  );
 
   const handleClickLeftBtn = () => {
     if (month === 0) {
@@ -49,16 +56,22 @@ export default function Calendar({
         <Button onClick={handleClickRightBtn}>&gt;</Button>
       </Header>
       <DayList>
-        {startEmptyDays.map((day) => (
-          <DayListItem key={day} className="day-list-item" />
+        {prevMonthDays.map((day) => (
+          <DayListItem key={day} className="day-list-item">
+            {day}
+            <Blur />
+          </DayListItem>
         ))}
         {days.map((day) => (
           <DayListItem key={day} className="day-list-item">
             {day}
           </DayListItem>
         ))}
-        {endEmptyDays.map((day) => (
-          <DayListItem key={day} className="day-list-item" />
+        {nextMonthDays.map((day) => (
+          <DayListItem key={day} className="day-list-item">
+            {day}
+            <Blur />
+          </DayListItem>
         ))}
       </DayList>
     </Container>
@@ -116,8 +129,18 @@ const DayList = styled.div`
 `;
 
 const DayListItem = styled.div`
+  position: relative;
   padding: 5px;
   border: 1px solid rgb(200, 200, 200);
   border-top: none;
   border-left: none;
+`;
+
+const Blur = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
 `;
