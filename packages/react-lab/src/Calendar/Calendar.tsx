@@ -57,9 +57,8 @@ export default function Calendar({
       </Header>
       <DayList>
         {prevMonthDays.map((day) => (
-          <DayListItem key={day} className="day-list-item">
+          <DayListItem key={day} className="day-list-item blur">
             {day}
-            <Blur />
           </DayListItem>
         ))}
         {days.map((day) => (
@@ -68,9 +67,8 @@ export default function Calendar({
           </DayListItem>
         ))}
         {nextMonthDays.map((day) => (
-          <DayListItem key={day} className="day-list-item">
+          <DayListItem key={day} className="day-list-item blur">
             {day}
-            <Blur />
           </DayListItem>
         ))}
       </DayList>
@@ -122,9 +120,15 @@ const DayList = styled.div`
 
   .day-list-item:nth-of-type(7n) {
     color: blue;
+    &.blur {
+      color: rgba(0, 0, 255, 0.3);
+    }
   }
   .day-list-item:nth-of-type(7n + 1) {
     color: red;
+    &.blur {
+      color: rgba(255, 0, 0, 0.3);
+    }
   }
 `;
 
@@ -134,13 +138,8 @@ const DayListItem = styled.div`
   border: 1px solid rgb(200, 200, 200);
   border-top: none;
   border-left: none;
-`;
 
-const Blur = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.7);
+  &.blur {
+    color: rgba(0, 0, 0, 0.3);
+  }
 `;
