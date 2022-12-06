@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 
 export default {
   component: 'Carousel',
-  title: 'charts/Carousel',
+  title: 'Carousel',
 };
 
 const Container = styled.div`

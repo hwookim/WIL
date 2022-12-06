@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 
 export default {
   component: 'Calendar',
-  title: 'charts/Calendar',
+  title: 'Calendar',
 };
 
 const Container = styled.div`
