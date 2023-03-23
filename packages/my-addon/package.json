@@ -4,6 +4,7 @@
   "license": "ISC",
   "private": true,
   "scripts": {
+    "dev": "yarn build --watch",
     "build": "tsc"
   },
   "files": [
@@ -20,14 +21,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.21.3",
-    "@storybook/addon-actions": "^6.5.16",
-    "@storybook/addon-essentials": "^6.5.16",
-    "@storybook/addon-interactions": "^6.5.16",
-    "@storybook/addon-links": "^6.5.16",
-    "@storybook/builder-webpack4": "^6.5.16",
-    "@storybook/manager-webpack4": "^6.5.16",
-    "@storybook/react": "^6.5.16",
-    "@storybook/testing-library": "^0.0.13",
-    "babel-loader": "^8.3.0"
+    "@storybook/react": "^6.5.16"
   }
 }
