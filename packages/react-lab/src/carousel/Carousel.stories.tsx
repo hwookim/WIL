@@ -3,6 +3,7 @@ import { ComponentStory } from '@storybook/react';
 
 import Carousel from './Carousel';
 import styled from '@emotion/styled';
+import { BrowserRouter } from 'react-router-dom';
 
 export default {
   component: 'Carousel',
@@ -15,9 +16,11 @@ const Container = styled.div`
 `;
 
 const Template: ComponentStory<typeof Carousel> = (args) => (
-  <Container>
-    <Carousel {...args} />
-  </Container>
+  <BrowserRouter>
+    <Container>
+      <Carousel {...args} />
+    </Container>
+  </BrowserRouter>
 );
 
 export const Default = Template.bind({});
